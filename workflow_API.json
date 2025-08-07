@@ -1,0 +1,197 @@
+{
+  "1": {
+    "inputs": {
+      "steps": 30.000000000000004,
+      "cfg": 2.0000000000000004,
+      "seed": 598779,
+      "pipe": [
+        "2",
+        0
+      ],
+      "model": [
+        "12",
+        0
+      ],
+      "cloth": [
+        "4",
+        0
+      ],
+      "pose": [
+        "11",
+        0
+      ],
+      "mask": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "CXH_Leffa_Viton_Run",
+    "_meta": {
+      "title": "CXH_Leffa_Viton_Run"
+    }
+  },
+  "2": {
+    "inputs": {
+      "model": "franciszzj/Leffa",
+      "viton_type": "hd"
+    },
+    "class_type": "CXH_Leffa_Viton_Load",
+    "_meta": {
+      "title": "CXH_Leffa_Viton_Load"
+    }
+  },
+  "3": {
+    "inputs": {
+      "image": "imgi_314_confident-young-man-in-a-white-shirt-on-transparent-background-png.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "4": {
+    "inputs": {
+      "image": "imgi_6_shirt-png-hd-dress-shirt-png-image-dress-shirt-png-914.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "images": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "7": {
+    "inputs": {
+      "face": false,
+      "hair": false,
+      "hat": false,
+      "sunglass": false,
+      "left_arm": true,
+      "right_arm": true,
+      "left_leg": false,
+      "right_leg": false,
+      "upper_clothes": true,
+      "skirt": false,
+      "pants": false,
+      "dress": false,
+      "belt": false,
+      "shoe": false,
+      "bag": false,
+      "scarf": false,
+      "detail_method": "VITMatte",
+      "detail_erode": 12,
+      "detail_dilate": 6,
+      "black_point": 0.15000000000000002,
+      "white_point": 0.99,
+      "process_detail": true,
+      "device": "cuda",
+      "max_megapixels": 2,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "LayerMask: SegformerB2ClothesUltra",
+    "_meta": {
+      "title": "LayerMask: Segformer B2 Clothes Ultra"
+    }
+  },
+  "8": {
+    "inputs": {
+      "invert_mask": false,
+      "grow": 0,
+      "blur": 0,
+      "mask": [
+        "7",
+        1
+      ]
+    },
+    "class_type": "LayerMask: MaskGrow",
+    "_meta": {
+      "title": "LayerMask: MaskGrow"
+    }
+  },
+  "9": {
+    "inputs": {
+      "mask": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "MaskPreview+",
+    "_meta": {
+      "title": "🔧 Mask Preview"
+    }
+  },
+  "10": {
+    "inputs": {
+      "images": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "11": {
+    "inputs": {
+      "model": "densepose_r50_fpn_dl.torchscript",
+      "cmap": "Parula (CivitAI)",
+      "resolution": 4096,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "DensePosePreprocessor",
+    "_meta": {
+      "title": "DensePose Estimator"
+    }
+  },
+  "12": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "longest",
+      "scale_to_length": 1280,
+      "background_color": "#000000",
+      "image": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "LayerUtility: ImageScaleByAspectRatio V2"
+    }
+  },
+  "13": {
+    "inputs": {
+      "filename_prefix": "output",
+      "images": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

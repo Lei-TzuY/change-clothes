@@ -1,0 +1,115 @@
+/* app/static/style.css */
+
+/* 全站字型與背景 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* 標題樣式 */
+h1 {
+  font-size: 2em;
+  margin-bottom: 1rem;
+}
+
+/* 表單區塊 */
+form {
+  margin-bottom: 1rem;
+}
+
+/* input 與 button 的共用樣式 */
+input[type="file"],
+button {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 當滑鼠移到按鈕上 */
+button:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+/* 成功或錯誤訊息 */
+#p1msg,
+#p2msg {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* 最佳寬度限制與陰影 */
+img {
+  max-width: 80%;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+/* Container 置中與寬度限制 */
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* 標題 */
+.title {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 1.5rem;
+}
+
+/* 卡片基礎 */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 卡片小標題 */
+.card h2 {
+  margin-top: 0;
+  font-size: 1.4em;
+  color: #444;
+}
+
+/* 表單內建樣式調整 */
+.card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card input[type="file"] {
+  margin-bottom: 0.8rem;
+}
+
+.card button {
+  align-self: flex-start;
+}
+
+/* 訊息顯示 */
+.msg {
+  margin-top: 0.5rem;
+  font-size: 0.95em;
+  color: #d33; /* 失敗時可改成紅色 */
+}
+
+/* 成功時可用深綠 */
+.msg.success {
+  color: #080;
+}
+
+/* 結果圖片 */
+.result img {
+  display: block;
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 0.8rem 0;
+}
+
