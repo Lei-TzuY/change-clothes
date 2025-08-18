@@ -31,16 +31,17 @@
       <div id="p2msg" class="msg"></div>
     </div>
 
-    <!-- 結果顯示 -->
-    {% if latest_img %}
-      <div class="card result">
-        <h2>最新結果</h2>
-        <img src="{{ latest_img|replace(current_app.config['OUTPUT_DIR'], '') }}" alt="試穿結果">
-      </div>
-    {% endif %}
+    <!-- 固定的結果容器 -->
+    <div id="result">
+      {% if latest_url %}
+        <div class="card result">
+          <h2>最新結果</h2>
+          <img src="{{ latest_url }}" alt="試穿結果">
+        </div>
+      {% endif %}
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
-

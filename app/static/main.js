@@ -1,9 +1,9 @@
-// app/static/main.js
 
+// app/static/main.js
 document.addEventListener('DOMContentLoaded', () => {
   let personUploaded = false;
 
-  // 人物圖上傳表單
+  // 人物圖上傳
   const form1 = document.getElementById('form1');
   const p1msg = document.getElementById('p1msg');
   form1.addEventListener('submit', async e => {
@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 衣服圖上傳表單
+  // 衣服圖上傳並顯示結果
   const form2 = document.getElementById('form2');
   const p2msg = document.getElementById('p2msg');
+  const resultDiv = document.getElementById('result');  // ← 結果容器
   form2.addEventListener('submit', async e => {
     e.preventDefault();
     if (!personUploaded) {
@@ -39,11 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const j = await res.json();
       if (res.ok) {
         p2msg.textContent = '✅ ' + j.message;
-        // 顯示新圖片
+
+        // —— 這裡開始清空舊結果、插入新結果 —— //
+        resultDiv.innerHTML = '';
+
+        const card = document.createElement('div');
+        card.className = 'card result';
+
+        const title = document.createElement('h2');
+        title.textContent = '最新結果';
+
         const imgEl = document.createElement('img');
         imgEl.src = j.download;
         imgEl.style.maxWidth = '80%';
-        document.body.appendChild(imgEl);
+
+        card.appendChild(title);
+        card.appendChild(imgEl);
+        resultDiv.appendChild(card);
+        // ———————————————————————————————— //
+
       } else {
         p2msg.textContent = '❌ ' + j.error;
       }
@@ -52,4 +67,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-

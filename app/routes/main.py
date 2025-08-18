@@ -1,37 +1,30 @@
+# app/routes/main.py
 import os
-from flask import Blueprint, current_app, render_template, url_for
+import glob
+from flask import Blueprint, current_app, render_template, url_for, send_from_directory
 
 bp = Blueprint('main', __name__)
+ALLOWED_EXT = {".png", ".jpg", ".jpeg", ".webp"}
 
 @bp.route('/')
 def index():
-    # 1. 取出絕對路徑的 OUTPUT_DIR（假設裡面放的是 .png）
     output_dir = current_app.config['OUTPUT_DIR']
+    # 確保資料夾存在
+    os.makedirs(output_dir, exist_ok=True)
 
-    # 2. 列出所有 png 檔
-    files = [
-        fn for fn in os.listdir(output_dir)
-        if fn.lower().endswith('.png')
-    ]
+    # 列出所有 .png
+    files = [f for f in os.listdir(output_dir) if f.lower().endswith('.png')]
+    latest_url = None
+    if files:
+        # 取最新
+        latest = max(files, key=lambda fn: os.path.getctime(os.path.join(output_dir, fn)))
+        # 建立 /outputs/<filename> 的 URL
+        latest_url = url_for('main.serve_output', filename=latest)
 
-    # 3. 沒圖就傳 None
-    if not files:
-        latest_url = None
-    else:
-        # 4. 挑最新的檔名
-        latest = max(
-            files,
-            key=lambda fn: os.path.getctime(os.path.join(output_dir, fn))
-        )
-
-        # 5. 計算相對於 static folder 的路徑
-        #    current_app.static_folder 會是 ".../yourapp/static"
-        static_root = current_app.static_folder
-        rel_dir = os.path.relpath(output_dir, static_root)  # e.g. "output"
-
-        # 6. 用 url_for 生成可直接在 <img> 用的 URL
-        latest_url = url_for('static', filename=f'{rel_dir}/{latest}')
-
-    # 7. 傳給模板
     return render_template('index.html', latest_url=latest_url)
+
+@bp.route('/outputs/<path:filename>')
+def serve_output(filename):
+    # 直接從 OUTPUT_DIR 讀檔案並回傳
+    return send_from_directory(current_app.config['OUTPUT_DIR'], filename)
 
