@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>虛擬試衣間 Try-on</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">虛擬試衣間 Try-on</h1>
+
+    <!-- 人物上傳卡片 -->
+    <div class="card">
+      <h2>步驟 1：上傳人物圖</h2>
+      <p>請選擇一張人物照片，我們將作為套衣基底。</p>
+      <form id="form1" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">上傳人物圖</button>
+      </form>
+      <div id="p1msg" class="msg"></div>
+    </div>
+
+    <!-- 衣服上傳卡片 -->
+    <div class="card">
+      <h2>步驟 2：上傳衣服圖</h2>
+      <p>選擇一張衣服圖，系統會自動合成試穿效果。</p>
+      <form id="form2" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">上傳衣服圖並合成</button>
+      </form>
+      <div id="p2msg" class="msg"></div>
+    </div>
+
+    <!-- 固定的結果容器 -->
+    <div id="result">
+      {% if latest_url %}
+        <div class="card result">
+          <h2>最新結果</h2>
+          <img src="{{ latest_url }}" alt="試穿結果">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

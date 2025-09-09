@@ -1,0 +1,23 @@
+<div class="navbar">
+  <div class="nav-inner">
+    <div class="brand">Picture Magician</div>
+    <div class="nav-links">
+      <a href="/">首頁</a>
+      <a href="/t2i">文生圖</a>
+      <a href="/i2i">圖生圖</a>
+      <a href="/inpaint">局部修復</a>
+    </div>
+    <div class="nav-links" style="margin-left:auto">
+      {% if current_user.is_authenticated %}
+        <span style="margin-right:8px;opacity:.8">{{ current_user.email }}</span>
+        <form method="post" action="{{ url_for('auth.logout_submit') }}" style="display:inline">
+          <button type="submit" class="btn" style="padding:6px 10px">登出</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('auth.login_form') }}">登入</a>
+        <a href="{{ url_for('auth.register_form') }}">註冊</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+

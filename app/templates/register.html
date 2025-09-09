@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>註冊</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>.flash{margin:10px 0;padding:8px;border-radius:6px}.flash.error{background:#ffe5e5;color:#a00}.flash.success{background:#e6ffea;color:#0a0}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer" />
+  <meta name="color-scheme" content="light dark" />
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">建立帳戶</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card">
+      <form method="post" action="{{ url_for('auth.register_submit') }}">
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>密碼 (至少 8 碼)</label>
+        <input type="password" name="password" minlength="8" required>
+
+        <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+        <div style="margin-top:12px">
+          <button type="submit" class="btn">註冊</button>
+          <a href="{{ url_for('auth.login_form') }}" class="btn" style="background:#666">已有帳號？登入</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

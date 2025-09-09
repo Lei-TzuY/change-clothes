@@ -1,5 +1,7 @@
 Flask
 Flask-Cors
 websocket-client
-
+Flask-SQLAlchemy
+Flask-Login
+requests
 

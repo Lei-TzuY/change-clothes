@@ -1,0 +1,74 @@
+{
+  "2": {
+    "inputs": {
+      "model": "wd-v1-4-moat-tagger-v2",
+      "threshold": 0.35,
+      "character_threshold": 0.85,
+      "replace_underscore": false,
+      "trailing_comma": false,
+      "exclude_tags": "",
+      "tags": "outdoors, sky, day, tree, no_humans, grass, plant, building, scenery, fence, road, bush, house",
+      "image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "WD14Tagger|pysssss",
+    "_meta": {
+      "title": "WD14圖像反推提詞"
+    }
+  },
+  "3": {
+    "inputs": {
+      "text": [
+        "2",
+        0
+      ],
+      "text2": "outdoors, sky, day, tree, no_humans, grass, plant, building, scenery, fence, road, bush, house"
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "顯示文本"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": [
+        "3",
+        0
+      ],
+      "path": "./ComfyUI/output",
+      "filename_prefix": "ComfyUI",
+      "filename_delimiter": "_",
+      "filename_number_padding": 4,
+      "file_extension": ".txt",
+      "encoding": "utf-8",
+      "filename_suffix": ""
+    },
+    "class_type": "Save Text File",
+    "_meta": {
+      "title": "儲存文本"
+    }
+  },
+  "5": {
+    "inputs": {
+      "image_path": "C:\\Users\\User\\Desktop\\00001-2890787883.png"
+    },
+    "class_type": "ZwngLoadImagePathOrURL",
+    "_meta": {
+      "title": "Load Image Path or URL"
+    }
+  },
+  "6": {
+    "inputs": {
+      "images": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  }
+}

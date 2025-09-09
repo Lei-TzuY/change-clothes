@@ -1,0 +1,260 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "meinamix_v12Final.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint載入器(簡易)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "text": "garden",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本編碼器"
+    }
+  },
+  "3": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本編碼器"
+    }
+  },
+  "4": {
+    "inputs": {
+      "seed": 1080317672075582,
+      "steps": 50,
+      "cfg": 7,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K採樣器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "儲存圖像"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "4",
+        0
+      ],
+      "vae": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解碼"
+    }
+  },
+  "9": {
+    "inputs": {
+      "vae_name": "kl-f8-anime2.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAE載入器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "pixels": [
+        "25",
+        0
+      ],
+      "vae": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE編碼"
+    }
+  },
+  "14": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled",
+      "samples": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "LatentUpscale",
+    "_meta": {
+      "title": "Latent縮放"
+    }
+  },
+  "15": {
+    "inputs": {
+      "samples": [
+        "21",
+        0
+      ],
+      "mask": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "SetLatentNoiseMask",
+    "_meta": {
+      "title": "設定Latent噪聲遮罩"
+    }
+  },
+  "19": {
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "ImageToMask",
+    "_meta": {
+      "title": "圖像到遮罩"
+    }
+  },
+  "21": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 512,
+      "height": 512,
+      "crop": "disabled",
+      "samples": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "LatentUpscale",
+    "_meta": {
+      "title": "Latent縮放"
+    }
+  },
+  "22": {
+    "inputs": {
+      "mask": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "遮罩到圖像"
+    }
+  },
+  "23": {
+    "inputs": {
+      "mask": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "InvertMask",
+    "_meta": {
+      "title": "遮罩反轉"
+    }
+  },
+  "24": {
+    "inputs": {
+      "images": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  },
+  "25": {
+    "inputs": {
+      "image_path": "D:\\comfyui\\ComfyUI_windows_portable\\ComfyUI\\output\\ComfyUI_00008_.png"
+    },
+    "class_type": "ZwngLoadImagePathOrURL",
+    "_meta": {
+      "title": "Load Image Path or URL"
+    }
+  },
+  "26": {
+    "inputs": {
+      "image_path": "C:\\Users\\User\\Desktop\\processed_mask.png"
+    },
+    "class_type": "ZwngLoadImagePathOrURL",
+    "_meta": {
+      "title": "Load Image Path or URL"
+    }
+  },
+  "27": {
+    "inputs": {
+      "images": [
+        "25",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  },
+  "28": {
+    "inputs": {
+      "images": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>登入</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>.flash{margin:10px 0;padding:8px;border-radius:6px}.flash.error{background:#ffe5e5;color:#a00}.flash.success{background:#e6ffea;color:#0a0}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">登入</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card">
+      <form method="post" action="{{ url_for('auth.login_submit') }}">
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>密碼</label>
+        <input type="password" name="password" required>
+
+        <div style="margin-top:12px">
+          <button type="submit" class="btn">登入</button>
+          <a href="{{ url_for('auth.register_form') }}" class="btn" style="background:#666">註冊新帳號</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

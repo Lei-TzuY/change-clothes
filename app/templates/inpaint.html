@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>局部重繪 Inpaint</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">局部重繪 Inpaint</h1>
+
+    <div class="card">
+      <form id="inpaintForm" enctype="multipart/form-data">
+        <label>原圖：</label>
+        <input type="file" name="image" required>
+        <label>遮罩 (白=保留 / 黑=重繪)：</label>
+        <input type="file" name="mask" required>
+        <input type="text" name="prompt" placeholder="輸入正向提示詞" required>
+        <input type="text" name="negative" placeholder="輸入反向提示詞 (選填)">
+        <button type="submit" class="btn">生成圖片</button>
+      </form>
+      <div id="inpaintMsg" class="msg"></div>
+      <div id="inpaintResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+{
+  "1": {
+    "inputs": {
+      "ckpt_name": "meinamix_v12Final.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint載入器(簡易)"
+    }
+  },
+  "2": {
+    "inputs": {
+      "text": "1girl, solo, long_hair, breasts, looking_at_viewer, blush, open_mouth, bangs, blue_eyes, simple_background, long_sleeves, white_background, bow, jewelry, upper_body, white_hair, hair_bow, earrings, parted_lips, two_side_up, black_bow, hair_intakes",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本編碼器"
+    }
+  },
+  "3": {
+    "inputs": {
+      "text": "mutated hands \nfingers, deformed,bad\nanatomy,disfigured,poorly drawn\nface,mutated,extra\nlimb,ugly,poorly drawn\nhands,missing limb,floating\nlimbs,disconnected\nlimbs,malformed hands,out of\nfocus,long neck,long body,\n",
+      "clip": [
+        "1",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本編碼器"
+    }
+  },
+  "4": {
+    "inputs": {
+      "seed": 595055991379893,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "18",
+        0
+      ],
+      "negative": [
+        "18",
+        1
+      ],
+      "latent_image": [
+        "48",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K採樣器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "儲存圖像"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "4",
+        0
+      ],
+      "vae": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解碼"
+    }
+  },
+  "9": {
+    "inputs": {
+      "vae_name": "kl-f8-anime2.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAE載入器"
+    }
+  },
+  "18": {
+    "inputs": {
+      "strength": 1.5,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "2",
+        0
+      ],
+      "negative": [
+        "3",
+        0
+      ],
+      "control_net": [
+        "19",
+        0
+      ],
+      "image": [
+        "47",
+        0
+      ],
+      "vae": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "ControlNet應用(進階)"
+    }
+  },
+  "19": {
+    "inputs": {
+      "control_net_name": "control_sd15_canny.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "ControlNet載入器"
+    }
+  },
+  "44": {
+    "inputs": {
+      "images": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  },
+  "47": {
+    "inputs": {
+      "low_threshold": 100,
+      "high_threshold": 200,
+      "resolution": 512,
+      "image": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "CannyEdgePreprocessor",
+    "_meta": {
+      "title": "Canny線條預處理器"
+    }
+  },
+  "48": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "49": {
+    "inputs": {
+      "image_path": "\"C:\\Users\\User\\Desktop\\蹲姿.png\""
+    },
+    "class_type": "ZwngLoadImagePathOrURL",
+    "_meta": {
+      "title": "Load Image Path or URL"
+    }
+  },
+  "50": {
+    "inputs": {
+      "images": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "預覽圖像"
+    }
+  }
+}

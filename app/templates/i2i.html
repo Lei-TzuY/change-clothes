@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>圖生圖 Image → Image</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">圖生圖 Image → Image</h1>
+
+    <div class="card">
+      <form id="i2iForm" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <input type="text" name="prompt" placeholder="輸入正向提示詞" required>
+        <input type="text" name="negative" placeholder="輸入反向提示詞 (選填)">
+        <div class="row">
+          <input type="number" step="0.01" name="denoise" placeholder="denoise (選填 0~1)">
+        </div>
+        <button type="submit" class="btn">生成圖片</button>
+      </form>
+      <div id="i2iMsg" class="msg"></div>
+      <div id="i2iResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

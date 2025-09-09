@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>文生圖 Text → Image</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">文生圖 Text → Image</h1>
+
+    <div class="card">
+      <form id="t2iForm">
+        <input type="text" name="prompt" placeholder="輸入正向提示詞" required>
+        <input type="text" name="negative" placeholder="輸入反向提示詞 (選填)">
+        <div class="row">
+          <input type="number" name="width" placeholder="寬 (選填)">
+          <input type="number" name="height" placeholder="高 (選填)">
+        </div>
+        <div class="row">
+          <input type="number" name="steps" placeholder="steps (選填)">
+          <input type="number" name="cfg" placeholder="cfg (選填)">
+        </div>
+        <button type="submit" class="btn">生成圖片</button>
+      </form>
+      <div id="t2iMsg" class="msg"></div>
+      <div id="t2iResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
