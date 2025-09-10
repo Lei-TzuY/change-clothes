@@ -4,4 +4,7 @@ websocket-client
 Flask-SQLAlchemy
 Flask-Login
 requests
-
+Flask-WTF
+Flask-Limiter
+Pillow
+moviepy

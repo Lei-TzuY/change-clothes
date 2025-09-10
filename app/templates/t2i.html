@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <title>文生圖 Text → Image</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <div class="container">
@@ -12,8 +19,22 @@
 
     <div class="card">
       <form id="t2iForm">
-        <input type="text" name="prompt" placeholder="輸入正向提示詞" required>
+        <div class="row">
+          <input type="text" name="prompt" placeholder="輸入正向提示詞 (prompt)" required>
+          <div>
+            <label>風格</label>
+            <select id="t2iStyle">
+              <option value="">自動判斷</option>
+              <option value="photoreal">寫實攝影</option>
+              <option value="anime">二次元</option>
+              <option value="illustration">插畫</option>
+              <option value="studio">棚拍</option>
+            </select>
+            <button type="button" id="t2iOptimize" class="btn secondary" style="margin-top:6px">優化提示詞</button>
+          </div>
+        </div>
         <input type="text" name="negative" placeholder="輸入反向提示詞 (選填)">
+        <button type="button" id="t2iFillNeg" class="btn ghost">填入常見反向詞</button>
         <div class="row">
           <input type="number" name="width" placeholder="寬 (選填)">
           <input type="number" name="height" placeholder="高 (選填)">
@@ -30,5 +51,6 @@
   </div>
 
   <script src="{{ url_for('static', filename='main.js') }}"></script>
+  {% include '_footer.html' %}
 </body>
 </html>

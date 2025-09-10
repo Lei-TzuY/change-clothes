@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>使用回饋問卷</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">使用回饋問卷</h1>
+
+    {% if success %}
+      <div class="flash success">已收到您的回覆，感謝提供意見！</div>
+    {% endif %}
+
+    <div class="card">
+      <form method="post" action="/survey/submit">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row">
+          <label>整體滿意度 (1~5)</label>
+          <input type="number" name="q1" min="1" max="5" placeholder="1-5">
+        </div>
+        <div class="row">
+          <label>畫質品質 (1~5)</label>
+          <input type="number" name="q2" min="1" max="5" placeholder="1-5">
+        </div>
+        <div class="row">
+          <label>速度體驗 (1~5)</label>
+          <input type="number" name="q3" min="1" max="5" placeholder="1-5">
+        </div>
+        <div class="row">
+          <label>易用性 (1~5)</label>
+          <input type="number" name="q4" min="1" max="5" placeholder="1-5">
+        </div>
+        <div class="row">
+          <label>功能完整度 (1~5)</label>
+          <input type="number" name="q5" min="1" max="5" placeholder="1-5">
+        </div>
+        <label>其他建議</label>
+        <textarea name="suggestion" placeholder="歡迎留下改善建議..."></textarea>
+        <button type="submit" class="btn">送出</button>
+      </form>
+    </div>
+  </div>
+
+  {% include '_footer.html' %}
+</body>
+</html>
+

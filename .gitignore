@@ -1,0 +1,29 @@
+# Byte-compiled / optimizations
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local artifacts
+output/
+received1/
+received2/
+backend/comfyui_output/
+backend/temp_input/
+backend/temp_inputs/
+backend/temp_uploads/
+gunicorn_error.log
+
+# Node / frontend caches
+node_modules/
+

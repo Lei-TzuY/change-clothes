@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>點數中心</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">點數中心</h1>
+
+    <div class="card">
+      <p class="hint">目前點數：<strong id="bal">{{ '%.2f' % balance }}</strong></p>
+      <form id="buyForm">
+        <div class="row">
+          <input type="number" step="1" min="1" name="amount" placeholder="加值點數 (開發用)">
+        </div>
+        <button type="submit" class="btn">加值</button>
+      </form>
+      <div id="buyMsg" class="msg"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('buyForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const data = new FormData(form);
+      const res = await fetch('/billing/purchase', { method: 'POST', body: data });
+      const j = await res.json();
+      const msg = document.getElementById('buyMsg');
+      if (res.ok) { msg.textContent = '加值成功'; document.getElementById('bal').textContent = (j.balance || 0).toFixed(2); }
+      else { msg.textContent = j.error || '加值失敗'; }
+    });
+  </script>
+
+  {% include '_footer.html' %}
+</body>
+</html>
+

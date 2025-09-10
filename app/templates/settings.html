@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>偏好設定</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">偏好設定</h1>
+
+    {% if error %}
+      <div class="flash error">讀取 ComfyUI 模型清單失敗：{{ error }}</div>
+    {% endif %}
+
+    <div class="card">
+      <form method="post" action="{{ url_for('settings.settings_save') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Checkpoint (ckpt_name)</label>
+        <select name="ckpt_name">
+          <option value="">預設/自動</option>
+          {% for name in ckpt_choices %}
+            <option value="{{ name }}" {% if selected_ckpt==name %}selected{% endif %}>{{ name }}</option>
+          {% endfor %}
+        </select>
+
+        <label>VAE (vae_name)</label>
+        <select name="vae_name">
+          <option value="">預設/自動</option>
+          {% for name in vae_choices %}
+            <option value="{{ name }}" {% if selected_vae==name %}selected{% endif %}>{{ name }}</option>
+          {% endfor %}
+        </select>
+
+        <div style="margin-top:12px">
+          <button type="submit" class="btn">儲存設定</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% include '_footer.html' %}
+</body>
+</html>

@@ -2,47 +2,61 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>換衣 Try-on</title>
+  <title>Try-on</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="color-scheme" content="dark light">
+  <style>.dz-hint{font-size:12px;color:var(--muted)}</style>
+  </head>
 <body>
   <div class="container">
     {% include '_nav.html' %}
-    <h1 class="title">換衣 Try-on</h1>
+    <h1 class="title">Try-on</h1>
 
-    <!-- 人像上傳 -->
-    <div class="card">
-      <h2>步驟 1：上傳人像</h2>
-      <p class="hint">請上傳一張人像，我們會暫存以供下一步使用。</p>
-      <form id="form1" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <button type="submit" class="btn">上傳人像</button>
-      </form>
-      <div id="p1msg" class="msg"></div>
+    <div class="grid grid-2">
+      <!-- Step 1: Upload person -->
+      <div class="card">
+        <h2>步驟一：上傳人物照</h2>
+        <p class="hint">先上傳人物照，稍後會套上衣服。</p>
+        <form id="form1" class="dropzone" enctype="multipart/form-data">
+          <input type="file" name="image" required>
+          <button type="submit" class="btn">上傳人物</button>
+          <div class="progress" aria-hidden="true" style="display:none"><div class="bar"></div></div>
+          <div class="dz-hint">可拖放圖片到此區</div>
+        </form>
+        <div id="p1preview" class="preview"></div>
+        <div id="p1msg" class="msg"></div>
+      </div>
+
+      <!-- Step 2: Upload clothes and run -->
+      <div class="card">
+        <h2>步驟二：上傳衣服並產生結果</h2>
+        <p class="hint">上傳上衣或連衣裙，系統將自動套用。</p>
+        <form id="form2" class="dropzone" enctype="multipart/form-data">
+          <input type="file" name="image" required>
+          <button type="submit" class="btn">上傳並產生</button>
+          <div class="progress" aria-hidden="true" style="display:none"><div class="bar"></div></div>
+          <div class="dz-hint">可拖放圖片到此區</div>
+        </form>
+        <div id="p2preview" class="preview"></div>
+        <div id="p2msg" class="msg"></div>
+      </div>
     </div>
 
-    <!-- 衣服上傳並生成結果 -->
-    <div class="card">
-      <h2>步驟 2：上傳衣服圖</h2>
-      <p class="hint">上傳衣服圖片，系統會自動合成換衣結果。</p>
-      <form id="form2" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <button type="submit" class="btn">上傳衣服並生成</button>
-      </form>
-      <div id="p2msg" class="msg"></div>
-    </div>
-
-    <!-- 最近結果顯示 -->
-    <div id="result">
-      {% if latest_url %}
-        <div class="card result">
-          <h2>最新結果</h2>
-          <img src="{{ latest_url }}" alt="合成結果">
-        </div>
-      {% endif %}
-    </div>
+    <div id="result"></div>
   </div>
 
+  <div id="imgModal" class="modal"><img alt="preview"></div>
+
   <script src="{{ url_for('static', filename='main.js') }}"></script>
+  {% include '_footer.html' %}
 </body>
 </html>
+

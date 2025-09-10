@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>圖生影片 Image → Video</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">圖生影片 Image → Video</h1>
+
+    <div class="card">
+      <form id="i2vForm" class="dropzone" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <div class="row">
+          <input type="number" step="0.1" name="duration" placeholder="duration 秒 (預設 4)">
+          <input type="number" name="fps" placeholder="fps (預設 24)">
+        </div>
+        <div class="row">
+          <select name="motion">
+            <option value="zoom_in">zoom_in</option>
+            <option value="zoom_out">zoom_out</option>
+            <option value="pan_left">pan_left</option>
+            <option value="pan_right">pan_right</option>
+            <option value="pan_up">pan_up</option>
+            <option value="pan_down">pan_down</option>
+          </select>
+          <div>
+            <input type="number" name="width" placeholder="輸出寬 (選填)">
+            <input type="number" name="height" placeholder="輸出高 (選填)">
+          </div>
+        </div>
+        <button type="submit" class="btn">產生影片</button>
+        <div class="progress" aria-hidden="true" style="display:none"><div class="bar"></div></div>
+      </form>
+      <div id="i2vPreview" class="preview"></div>
+      <div id="i2vMsg" class="msg"></div>
+      <div id="i2vResult" class="result"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+  {% include '_footer.html' %}
+</body>
+</html>
+

@@ -4,7 +4,13 @@
   <meta charset="utf-8">
   <title>註冊</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+  <script src="https://{{ recaptcha_domain|default('www.google.com') }}/recaptcha/api.js" async defer></script>
   <style>.flash{margin:10px 0;padding:8px;border-radius:6px}.flash.error{background:#ffe5e5;color:#a00}.flash.success{background:#e6ffea;color:#0a0}</style>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -26,13 +32,21 @@
 
     <div class="card">
       <form method="post" action="{{ url_for('auth.register_submit') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <label>Email</label>
         <input type="email" name="email" required>
 
         <label>密碼 (至少 8 碼)</label>
-        <input type="password" name="password" minlength="8" required>
+        <input type="password" name="password" minlength="8" autocomplete="new-password" required>
+
+        <label>再次確認密碼</label>
+        <input type="password" name="confirm_password" minlength="8" autocomplete="new-password" required>
 
         <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+        {% if not recaptcha_site_key %}
+          <div class="hint" style="margin-top:8px;color:#a00">未設定 reCAPTCHA Site Key。可在本機開發時設定 RECAPTCHA_USE_TEST_KEYS=1 使用 Google 測試金鑰。</div>
+        {% endif %}
+        <div class="hint" style="margin-top:6px">若看不到驗證方塊，請改用 <code>RECAPTCHA_SCRIPT_DOMAIN=www.recaptcha.net</code> 或關閉廣告/追蹤阻擋外掛後再試。</div>
         <div style="margin-top:12px">
           <button type="submit" class="btn">註冊</button>
           <a href="{{ url_for('auth.login_form') }}" class="btn" style="background:#666">已有帳號？登入</a>
@@ -40,6 +54,6 @@
       </form>
     </div>
   </div>
+  {% include '_footer.html' %}
 </body>
 </html>
-

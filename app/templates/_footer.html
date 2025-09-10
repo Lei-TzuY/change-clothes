@@ -1,0 +1,16 @@
+<footer style="margin:40px auto 20px; max-width:980px; padding:12px 20px; color:var(--muted); border-top:1px solid var(--border);">
+  <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+    <div><strong>專題負責人：</strong> 雷子毅</div>
+    <div><strong>電話：</strong> <a href="tel:0971659235" style="color:inherit;text-decoration:none">09-71659235</a></div>
+    <div><strong>信箱：</strong> <a href="mailto:S10350158@thu.edu.tw" style="color:inherit;">S10350158@thu.edu.tw</a></div>
+    <div><strong>ST426 實驗室：</strong> <a href="http://st426lab.duckdns.org" target="_blank">http://st426lab.duckdns.org</a></div>
+  </div>
+</footer>
+
+<!-- Floating Assistant: Prompt helper + LLM Navigator -->
+<script>
+  // Optional base for static; can be omitted
+  window.FLASK_STATIC_BASE = '{{ url_for('static', filename='')[:-1] }}';
+</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='assistant.css') }}">
+<script src="{{ url_for('static', filename='assistant.js') }}"></script>

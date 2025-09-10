@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>帳戶資料</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
+</head>
+<body>
+  <div class="container">
+    {% include '_nav.html' %}
+    <h1 class="title">帳戶資料</h1>
+    <div class="card">
+      <p><strong>Email：</strong> {{ current_user.email }}</p>
+      <p><strong>建立時間：</strong> {{ current_user.created_at }}</p>
+      <div style="margin-top:12px">
+        <a class="btn" href="{{ url_for('auth.password_form') }}">變更密碼</a>
+      </div>
+    </div>
+  </div>
+  {% include '_footer.html' %}
+</body>
+</html>

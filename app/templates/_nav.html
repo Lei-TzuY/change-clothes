@@ -1,16 +1,27 @@
 <div class="navbar">
   <div class="nav-inner">
     <div class="brand">Picture Magician</div>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
     <div class="nav-links">
       <a href="/">首頁</a>
       <a href="/t2i">文生圖</a>
       <a href="/i2i">圖生圖</a>
-      <a href="/inpaint">局部修復</a>
+      <a href="/inpaint">局部修補</a>
+      <a href="/i2v">圖生影片</a>
+      <a href="/gallery">畫廊</a>
+      <a href="/billing">購買</a>
+      <a href="/survey">問卷</a>
     </div>
-    <div class="nav-links" style="margin-left:auto">
+    <div class="nav-actions">
+      <button id="themeToggle" class="btn ghost theme" title="切換主題">🌓</button>
       {% if current_user.is_authenticated %}
+        <a href="{{ url_for('settings.settings_page') }}">設定</a>
+        <span style="opacity:.4">|</span>
+        <a href="{{ url_for('auth.profile_page') }}">帳號</a>
+        <span style="margin:0 8px;opacity:.6">|</span>
         <span style="margin-right:8px;opacity:.8">{{ current_user.email }}</span>
         <form method="post" action="{{ url_for('auth.logout_submit') }}" style="display:inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <button type="submit" class="btn" style="padding:6px 10px">登出</button>
         </form>
       {% else %}
@@ -20,4 +31,3 @@
     </div>
   </div>
 </div>
-

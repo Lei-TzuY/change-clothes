@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <title>登入</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Site icons -->
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16.png') }}?v=1">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}?v=1">
   <style>.flash{margin:10px 0;padding:8px;border-radius:6px}.flash.error{background:#ffe5e5;color:#a00}.flash.success{background:#e6ffea;color:#0a0}</style>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -22,11 +28,16 @@
 
     <div class="card">
       <form method="post" action="{{ url_for('auth.login_submit') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <label>Email</label>
         <input type="email" name="email" required>
 
         <label>密碼</label>
         <input type="password" name="password" required>
+
+        <label style="display:flex;align-items:center;gap:6px;margin-top:6px">
+          <input type="checkbox" name="remember"> 記住我
+        </label>
 
         <div style="margin-top:12px">
           <button type="submit" class="btn">登入</button>
@@ -35,6 +46,6 @@
       </form>
     </div>
   </div>
+  {% include '_footer.html' %}
 </body>
 </html>
-
