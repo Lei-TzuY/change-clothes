@@ -27,3 +27,5 @@ gunicorn_error.log
 # Node / frontend caches
 node_modules/
 
+*.db
+*.sqlite3
