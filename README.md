@@ -4,10 +4,16 @@
 - 前端頁面（上傳人像、上傳衣服／素材、顯示結果）
 - 與 ComfyUI 的工作流整合（Text2Image、Image2Image、Inpaint）
 - 後端 API（上傳、觸發推論、輸出檔案存取）
+<<<<<<< HEAD
 - 帳戶系統（註冊／登入／登出／修改密碼／個人資料）
 - reCAPTCHA 驗證（註冊須通過）
 - SQLite（預設）或自訂資料庫（SQLAlchemy）
  - CSRF 防護（Flask‑WTF）與基本 Rate Limit（Flask‑Limiter）
+=======
+- 帳戶系統（註冊／登入／登出）
+- reCAPTCHA 驗證（註冊須通過）
+- SQLite（預設）或自訂資料庫（SQLAlchemy）
+>>>>>>> origin/main
 
 ## 快速開始
 1) 建立與啟用虛擬環境
@@ -69,12 +75,18 @@ FLASK_APP=server.py flask run --host=0.0.0.0 --port=5020
 - 帳戶
   - `GET /auth/register` 註冊頁（含 reCAPTCHA）
   - `POST /auth/register` 送出註冊
+<<<<<<< HEAD
   - `GET /auth/login` 登入頁（支援「記住我」）
   - `POST /auth/login` 送出登入
   - `POST /auth/logout` 登出
   - `GET /auth/profile` 帳戶資料
   - `GET /auth/password` 更改密碼頁
   - `POST /auth/password` 送出更改密碼
+=======
+  - `GET /auth/login` 登入頁
+  - `POST /auth/login` 送出登入
+  - `POST /auth/logout` 登出
+>>>>>>> origin/main
 - API（部分）
   - `POST /upload1` 上傳人像
   - `POST /upload2` 上傳衣服並觸發合成
@@ -90,9 +102,12 @@ FLASK_APP=server.py flask run --host=0.0.0.0 --port=5020
 - `COMFY_ADDR`：ComfyUI 位置，預設 `127.0.0.1:8188`
 - `COMFY_OUTPUT`：ComfyUI 輸出目錄；Windows 預設為專案 `output/`
 - `OUTPUT_DIR`：後端輸出檔案服務的根目錄（由 `config.py` 設定）
+<<<<<<< HEAD
  - `RECAPTCHA_SCRIPT_DOMAIN`：reCAPTCHA 載入網域，預設 `www.google.com`，中國網路可用 `www.recaptcha.net`
  - `RECAPTCHA_USE_TEST_KEYS`：本機開發可設 `1` 使用 Google 測試金鑰
  - `MAX_CONTENT_LENGTH_MB`：上傳檔案大小上限（MB，預設 20）
+=======
+>>>>>>> origin/main
 
 資料表會在啟動時自動 `create_all()` 建立（SQLite 預設）。如需版本控管建議導入 Alembic。
 
@@ -122,7 +137,11 @@ FLASK_APP=server.py flask run --host=0.0.0.0 --port=5020
   - 清除瀏覽器快取，或確認進程實際載入的是 `server.py` 版本的 app。
 
 ## 開發建議
+<<<<<<< HEAD
 - 已啟用 CSRF 與基本 Rate Limit；上線建議改用 Redis 等外部儲存作為限流 backend（`storage_uri`）。
+=======
+- 預設未啟用 CSRF；若要表單更安全，建議導入 Flask‑WTF。
+>>>>>>> origin/main
 - 若要部署正式環境，請：
   - 設定強隨機的 `SECRET_KEY`
   - 使用正式的資料庫（`DATABASE_URL`）與遷移工具（Alembic）

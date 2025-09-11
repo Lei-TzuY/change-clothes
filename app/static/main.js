@@ -154,6 +154,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (v === '') input.value = String(val);
     }
 
+    function ensureLabeled(input, text) {
+      if (!input) return;
+      // If already wrapped
+      if (input.parentElement && input.parentElement.classList && input.parentElement.classList.contains('field')) {
+        const first = input.parentElement.querySelector('label');
+        if (first) first.textContent = text;
+        else {
+          const l = document.createElement('label'); l.textContent = text; input.parentElement.insertBefore(l, input);
+        }
+        return;
+      }
+      const wrap = document.createElement('div'); wrap.className = 'field';
+      const label = document.createElement('label'); label.textContent = text;
+      input.parentElement.insertBefore(wrap, input);
+      wrap.appendChild(label);
+      wrap.appendChild(input);
+    }
+
     async function ensureNegative(el) {
       if (!el || (el.value && el.value.trim() !== '')) return;
       try { const r = await fetch('/prompt/presets'); if (!r.ok) return; const j = await r.json(); el.value = j.negative_default || el.value; } catch {}
@@ -162,31 +180,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // t2i
     const t2iForm = document.getElementById('t2iForm');
     if (t2iForm) {
-      setIfEmpty(t2iForm.querySelector('input[name="width"]'), defSize.w);
-      setIfEmpty(t2iForm.querySelector('input[name="height"]'), defSize.h);
-      setIfEmpty(t2iForm.querySelector('input[name="steps"]'), defStepsT2I);
-      setIfEmpty(t2iForm.querySelector('input[name="cfg"]'), defCfg);
+      const w = t2iForm.querySelector('input[name="width"]');
+      const h = t2iForm.querySelector('input[name="height"]');
+      const steps = t2iForm.querySelector('input[name="steps"]');
+      const cfg = t2iForm.querySelector('input[name="cfg"]');
+      const neg = t2iForm.querySelector('input[name="negative"]');
+      setIfEmpty(w, defSize.w); ensureLabeled(w, '寬度 Width');
+      setIfEmpty(h, defSize.h); ensureLabeled(h, '高度 Height');
+      setIfEmpty(steps, defStepsT2I); ensureLabeled(steps, '步數 Steps');
+      setIfEmpty(cfg, defCfg); ensureLabeled(cfg, 'CFG');
       // Negative default
-      ensureNegative(t2iForm.querySelector('input[name="negative"]'));
+      ensureNegative(neg); ensureLabeled(neg, '負面詞 Negative');
     }
 
     // i2i
     const i2iForm = document.getElementById('i2iForm');
     if (i2iForm) {
-      setIfEmpty(i2iForm.querySelector('input[name="width"]'), defSize.w);
-      setIfEmpty(i2iForm.querySelector('input[name="height"]'), defSize.h);
-      setIfEmpty(i2iForm.querySelector('input[name="steps"]'), defStepsI2I);
-      setIfEmpty(i2iForm.querySelector('input[name="cfg"]'), defCfg);
-      setIfEmpty(i2iForm.querySelector('input[name="denoise"]'), defDenoise);
-      setIfEmpty(i2iForm.querySelector('input[name="sampler_name"]'), defSampler);
-      setIfEmpty(i2iForm.querySelector('input[name="scheduler"]'), defScheduler);
-      ensureNegative(i2iForm.querySelector('input[name="negative"]'));
+      const w = i2iForm.querySelector('input[name="width"]');
+      const h = i2iForm.querySelector('input[name="height"]');
+      const steps = i2iForm.querySelector('input[name="steps"]');
+      const cfg = i2iForm.querySelector('input[name="cfg"]');
+      const denoise = i2iForm.querySelector('input[name="denoise"]');
+      const sampler = i2iForm.querySelector('input[name="sampler_name"]');
+      const scheduler = i2iForm.querySelector('input[name="scheduler"]');
+      const neg = i2iForm.querySelector('input[name="negative"]');
+      setIfEmpty(w, defSize.w); ensureLabeled(w, '寬度 Width');
+      setIfEmpty(h, defSize.h); ensureLabeled(h, '高度 Height');
+      setIfEmpty(steps, defStepsI2I); ensureLabeled(steps, '步數 Steps');
+      setIfEmpty(cfg, defCfg); ensureLabeled(cfg, 'CFG');
+      setIfEmpty(denoise, defDenoise); ensureLabeled(denoise, '重繪強度 Denoise');
+      setIfEmpty(sampler, defSampler); ensureLabeled(sampler, '取樣器 Sampler');
+      setIfEmpty(scheduler, defScheduler); ensureLabeled(scheduler, '調度 Scheduler');
+      ensureNegative(neg); ensureLabeled(neg, '負面詞 Negative');
     }
 
     // inpaint
     const inpaintForm = document.getElementById('inpaintForm');
     if (inpaintForm) {
-      ensureNegative(inpaintForm.querySelector('input[name="negative"]'));
+      const neg = inpaintForm.querySelector('input[name="negative"]');
+      ensureNegative(neg); ensureLabeled(neg, '負面詞 Negative');
     }
   }
 
