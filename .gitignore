@@ -5,6 +5,7 @@ __pycache__/
 
 # Virtual environments
 venv/
+.env
 .env/
 .venv/
 
@@ -19,10 +20,14 @@ output/
 received1/
 received2/
 backend/comfyui_output/
+backend/comfyui_input/
 backend/temp_input/
 backend/temp_inputs/
 backend/temp_uploads/
+backend/config.env
 gunicorn_error.log
+*.log
+*.bak
 
 # Node / frontend caches
 node_modules/
