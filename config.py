@@ -19,9 +19,11 @@ DISABLE_RATELIMIT = (os.getenv("DISABLE_RATELIMIT", "0") == "1") or TEST_MODE
 # Flask-Limiter respects this flag
 RATELIMIT_ENABLED = not DISABLE_RATELIMIT
 
-# ✅ 正確：用環境變數名稱讀值
-RECAPTCHA_SITE_KEY   = os.getenv("6LcWrsMrAAAAAB-skctSJXUhCyDyj8vH4l0B-sB7", "")
-RECAPTCHA_SECRET_KEY = os.getenv("6LcWrsMrAAAAAIEYZfkGuX2uTDnXD1BKSGK65-pe", "")
+# Keep credentials outside the repository. The application refuses
+# registration when these values are absent unless explicit test keys are
+# enabled for local development below.
+RECAPTCHA_SITE_KEY = os.getenv("RECAPTCHA_SITE_KEY", "")
+RECAPTCHA_SECRET_KEY = os.getenv("RECAPTCHA_SECRET_KEY", "")
 
 # 若在中國大陸等地可能需要 recaptcha.net
 RECAPTCHA_SCRIPT_DOMAIN = os.getenv("RECAPTCHA_SCRIPT_DOMAIN", "www.google.com")
